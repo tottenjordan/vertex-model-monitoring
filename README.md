@@ -1,6 +1,6 @@
 # vertex-model-monitoring
 
-### jordantotten ToDos:
+### jordantotten@ ToDos:
 
 ### robv@ ToDos:
 - [x] Bring in and modify pre-processing code for covertype data
