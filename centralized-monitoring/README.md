@@ -23,6 +23,8 @@ pip install --upgrade --force-reinstall google_cloud_aiplatform-1.36.dev20231025
 
 ## To send skewed traffic to endpoint
 
+> *Note: check args and default values:*
+
 ```
 python simulated_traffic/main.py --count=3
 ```
