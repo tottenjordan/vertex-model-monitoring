@@ -21,6 +21,12 @@ pip install --upgrade --force-reinstall google_cloud_aiplatform-1.36.dev20231025
 * SDK: [Experimental Python SDK User Guide](https://docs.google.com/document/d/1v4WxRXj9EZxqhO6UChWRGBsYLpnCkwwWrM-eb4kaDQ4/edit?resourcekey=0-AH7cd8evs1ghl7L18Eauiw)
 * REST API: [Experimental REST API User Guide](https://docs.google.com/document/d/10CR4040fQfDIt87qZr5t_EXkrFKRm_jc9NCOIy8RLes/edit?resourcekey=0-m9El9DRcDEAlGg3ziPZZtA)
 
+## To send skewed traffic to endpoint
+
+```
+python simulated_traffic/main.py --count=3
+```
+
 ### Importing
 
 ```
