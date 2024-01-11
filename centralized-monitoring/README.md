@@ -45,16 +45,14 @@ python simulated_traffic/main.py --count=10 --multiplier=2 --endpoint_id=8073164
 
 #### [4] Once monitoring job runs, get email alerts and view deviations in Vertex AI Monitoring console:
 
-> *email alerts*
+> Option 1
+
+![alt-text-1](imgs/vertex_mm_email_alert.png "email alerts") ![alt-text-2](imgs/mm_console_view_deviations.png "console view")
+
+> Option 2
 
 <p align="center">
-<img src='imgs/vertex_mm_email_alert.png' width='800' height='500' />
-</p>
-
-> *console view*
-
-<p align="center">
-<img src='imgs/mm_console_view_deviations.png' width='800' height='500' />
+<img src="imgs/vertex_mm_email_alert.png" width="425"/> <img src="imgs/mm_console_view_deviations.png" width="425"/> 
 </p>
 
 #### [5] Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job will fail:
