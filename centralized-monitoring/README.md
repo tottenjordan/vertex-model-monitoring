@@ -1,5 +1,47 @@
 # Vertex AI Centralized Model Monitoring (private preview)
 
+
+<img src="https://services.google.com/fh/files/misc/continous_gif.gif" />
+
+
+## How to use this repo
+--
+
+1. Use one of the notebooks to configure and deploy a model, endpoint, and model monitoring job
+2. Ensure the same features configured for monitoring are specified in the `simulated_traffic/main.py` file. This will send prediction requests with feature values the deviate from the baseline training distributions. Numerical features will be skewed with a `multiplier`; for categorical values, just choose a subset of values to send.   
+3. From command line, send skewed traffic to endpoint to trigger monitoring alerts (check all possible args and default values): 
+
+```
+python simulated_traffic/main.py --count=10 --multiplier=2 --endpoint_id=807316412694528000
+```
+4. Once monitoring job runs (per the schedule defined in the monitoring config in (1)), get email alerts and view deviations in Vertex AI Monitoring console:
+
+**email alerts:**
+
+<img src='imgs/vertex_mm_email_alert.png'>
+
+**console view:**
+
+<img src='imgs/mm_console_view_deviations.png'>
+
+5. **Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job status will fail:**
+
+<img src='imgs/successfull_and_failed_jobs_console_view.png'>
+
+6. You can easily `pause` a monitoring job when it's not needed
+
+<img src='imgs/run_on_demand_or_pause_scchedule.png'>
+
+7. Similarly, you can `resume` the job, or once (enough) skewed prediction requests are sent: run it on-demand:
+
+<img src='imgs/resume_mm_job.png'>
+
+*when resuming a Model Monitoring job schedule, you have the option to either (1) resume from this time forward **only** or (2) additionally rerun every inerval skipped while paused:*
+
+<img src='imgs/resume_mm_job_behavior.png'>
+
+--
+
 ## pip installs
 
 **install dependencies**
@@ -211,6 +253,6 @@ objective_config=model_monitor.spec.ObjectiveSpec(
 <img src="https://services.google.com/fh/files/misc/alert_email.png" />
 
 
-### Checking the "Monitor" tab under "Vertex AI"
+### Checking console
 
-<img src="https://services.google.com/fh/files/misc/continous_gif.gif" />
+> TODO

@@ -4,73 +4,12 @@ import sys
 import time
 import random
 import string
-
 import logging
 import argparse
-# import args_parse 
-
-
 import warnings
-# warnings.filterwarnings('ignore')
-
 from typing import List
-
 from google.cloud import bigquery
 
-
-# MODEL_OPTS = {
-#     "--project_number": {
-#         'default': "934903580331", 
-#         'type' : str
-#     },
-#     "--project_id": {
-#         'default': "hybrid-vertex", 
-#         'type' : str
-#     },
-#     "--bucket_name": {
-#         'default': "tmp", 
-#         'type' : str
-#     },
-#     "--artifacts_dir": {
-#         'type' : str
-#     },
-#     "--region": {
-#         'default': "us-central1", 
-#         'type' : str
-#     },
-#     "--endpoint_id": {
-#         'default': "6719135348548435968", 
-#         'type' : str
-#     },
-#     "--bq_logging_table_uri": {
-#         'default': "bq://hybrid-vertex.churn_production_v5.req_resp", 
-#         'type' : str
-#     },
-#     "--iterations": {
-#         'default': 5, 
-#         'type' : int
-#     },
-#     "--max_rows": {
-#         'default': 4000, 
-#         'type' : int
-#     },
-#     "--sleep_time": {
-#         'default': 1, 
-#         'type' : int
-#     },
-#     "--count": {
-#         'default': 1, 
-#         'type' : int
-#     },
-#     "--multiplier": {
-#         'default': 2.0, 
-#         'type' : float
-#     }
-# }
-
-# FLAGS = argparse.parse_common_options(
-#     opts=MODEL_OPTS.items(),
-# )
 def monitoring_test(args):
     
     # public available
@@ -114,17 +53,6 @@ def monitoring_test(args):
         'South Africa', 'Vietnam'
     ]
     print(SUBSET_COUNTRY_LIST)
-    
-#     # =============================================
-#     # imports
-#     # =============================================
-#     # google cloud SDKs
-#     from google.cloud import bigquery
-#     import google.cloud.aiplatform as aiplatform
-
-#     # # client SDKs
-#     bq_client = bigquery.Client(project=args.project_id)
-#     aiplatform.init(project=args.project_id, location=args.region)
     
     ### start
     start_time = time.time()
@@ -187,7 +115,6 @@ def monitoring_test(args):
     print(f"full_runtime_mins: {full_runtime_mins}")
 
 
-# def main(args: argparse.Namespace):
 def send_traffic(args):
     """
     > TODO
@@ -199,11 +126,9 @@ def send_traffic(args):
     print("starting monitoring_test...")
     monitoring_test(args)
     
-    
 # ====================================================
 # Args
 # ====================================================
-# def get_args(raw_args: List[str]) -> argparse.Namespace:
 def parse_args():
     """Parses parameters and hyperparameters for training a policy.
 
@@ -231,8 +156,6 @@ def parse_args():
     parser.add_argument("--count", default=1, type=int)
     parser.add_argument("--multiplier", default=2.0, type=float)
     
-    # return parser.parse_args(raw_args)
-    # return parser.parse_args()
     args = parser.parse_args()
     return args
 
@@ -242,81 +165,3 @@ def main():
     
 if __name__ == '__main__':
     main()
-
-    
-# if __name__ == "__main__":
-#     logging.basicConfig(
-#         format='%(asctime)s - %(message)s',
-#         level=logging.INFO, 
-#         datefmt='%d-%m-%y %H:%M:%S',
-#         stream=sys.stdout
-#     )
-    
-#     logging.info("starting script...")
-    
-#     args = parse_args()
-#     logging.info('Args: %s', args)
-    
-#     main(args)
-    
-#     logging.info("Reinforcement learning task completed.")
-    
-    
-    
-# def monitoring_test(
-#     endpoint, 
-#     table, 
-#     max_rows=1000, 
-#     count=1, 
-#     seconds=3, 
-#     interval=250, 
-#     multiplier=2,
-#     country_list=[],
-#     # perturb_num={}
-# ):
-    
-    
-# see example here: 
-# > https://github.com/jswortz/spotify_mpd_two_tower/blob/main/beam_training/main-train.py
-
-# ! python3 main-train.py $PROJECT_ID $VPC_NETWORK_NAME 
-
-# # setup
-# PROJECT_ID = sys.argv[1]      # 'hybrid-vertex'
-# NETWORK = sys.argv[2]         # 'ucaip-haystack-vpc-network'
-# REGION = sys.argv[3]          # 'us-central1' # Set the region for Dataflow jobs
-# VERSION = sys.argv[4]
-# BUCKET_NAME = sys.argv[5]     # 'spotify-data-regimes'
-# GCS_SUBFOLDER = s
-
-# args = {
-#     'job_name': JOB_NAME,
-#     'runner': RUNNER,
-#     'source_query': QUERY,
-#     'bq_source_table': TABLE_SPEC,
-#     'network': NETWORK,
-#     'candidate_sink': CANDIDATE_DIR,
-#     'num_tfrecords': NUM_TF_RECORDS,
-#     'project': PROJECT_ID,
-#     'region': REGION,
-#     'staging_location': STAGING_DIR,
-#     'temp_location': TEMP_DIR,
-#     'save_main_session': True,
-#     'version': VERSION,
-#     'setup_file': './setup.py',
-#     'folder': GCS_SUBFOLDER, # sys.argv[2], ## train or valid
-#     'bucket_name': BUCKET_NAME,
-# }
-
-# print("Number of Expected TFRecords: {}".format(NUM_TF_RECORDS))
-
-
-# def main():
-#     from train_pipeline import train_pipe_shape
-#     # from train_pipeline import train_pipe
-    
-#     train_pipe_shape.run(args)
-#     # train_pipe.run(args) # sequence example
-    
-# if __name__ == '__main__':
-#     main()
