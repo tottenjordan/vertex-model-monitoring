@@ -27,38 +27,51 @@ my_model_monitor = model_monitor.ModelMonitor.create(
   * Numerical features will be skewed with a `multiplier`
   * categorical values, just choose a subset of values to send
   
-#### [3] From command line, send skewed traffic to endpoint to trigger monitoring alerts (*check all possible args and default values*): 
+#### [3] From command line, send skewed traffic to endpoint to trigger monitoring alerts:
+
+> *check all possible args and default values* 
 
 ```
 python simulated_traffic/main.py --count=10 --multiplier=2 --endpoint_id=807316412694528000
 ```
-#### [4] Once monitoring job runs *(per schedule defined in the monitoring config)*, get email alerts and view deviations in Vertex AI Monitoring console:
 
-**email alerts:**
+#### [4] Once monitoring job runs, get email alerts and view deviations in Vertex AI Monitoring console:
 
-<img src='imgs/vertex_mm_email_alert.png' width='500' height='300'>
+> *email alerts*
 
-**console view:**
+<p align="center">
+<img src='imgs/vertex_mm_email_alert.png' width='800' height='500' />
+</p>
 
-<div>
-<img src='imgs/mm_console_view_deviations.png' width='500' height='300'/>
-</div>
-    
-#### [5] Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job status will fail:
+> *console view*
 
-<img src='imgs/successfull_and_failed_jobs_console_view.png' width='500' height='300'>
+<p align="center">
+<img src='imgs/mm_console_view_deviations.png' width='800' height='500' />
+</p>
 
-#### [6] You can easily `pause` a monitoring job when it's not needed
+#### [5] Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job will fail:
 
-<img src='imgs/run_on_demand_or_pause_scchedule.png' width='500' height='300'>
+<p align="center">
+<img src='imgs/successfull_and_failed_jobs_console_view.png' width='800' height='500' />
+</p>
 
-#### [7] Similarly, you can `resume` the job, or once (enough) skewed prediction requests are sent: run it on-demand:
+#### [6] You can easily `pause` a monitoring job when it's not needed, or optionally choose to run a job on-demand
 
-<img src='imgs/resume_mm_job.png' width='500' height='300'>
+<p align="center">
+<img src='imgs/run_on_demand_or_pause_scchedule.png' width='800' height='500' />
+</p>
+
+#### [7] Similarly, you can `resume` the job
+
+<p align="center">
+<img src='imgs/resume_mm_job.png' width='800' height='500' />
+</p>
 
 *when resuming a Model Monitoring job schedule, you have the option to either (1) resume from this time forward **only** or (2) additionally rerun every inerval skipped while paused:*
 
-<img src='imgs/resume_mm_job_behavior.png' width='500' height='300'>
+<p align="center">
+<img src='imgs/resume_mm_job_behavior.png' width='800' height='500' />
+</p>
 
 
 ## pip installs
