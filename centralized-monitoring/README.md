@@ -5,42 +5,61 @@
 
 
 ## How to use this repo
---
 
-1. Use one of the notebooks to configure and deploy a model, endpoint, and model monitoring job
-2. Ensure the same features configured for monitoring are specified in the `simulated_traffic/main.py` file. This will send prediction requests with feature values the deviate from the baseline training distributions. Numerical features will be skewed with a `multiplier`; for categorical values, just choose a subset of values to send.   
-3. From command line, send skewed traffic to endpoint to trigger monitoring alerts (check all possible args and default values): 
+#### [1] Use one of the notebooks to configure and deploy a model, endpoint, and model monitoring job
+
+```python
+my_model_monitor = model_monitor.ModelMonitor.create(
+    display_name='my-display-name',
+    model_name='projects/123/locations/us-central1/models/321',
+    model_version_id='1',
+    # Optional, for default model monitoring spec.
+    objective_config=default_objective_config,
+    output_config=default_output_config,
+    notification_config=default_notification_config,
+)
+```
+
+> see below for more on this
+
+#### [2] Ensure the same features configured for monitoring are specified in the `simulated_traffic/main.py` file
+  * This will send prediction requests with feature values the deviate from the baseline training distributions
+  * Numerical features will be skewed with a `multiplier`
+  * categorical values, just choose a subset of values to send
+  
+#### [3] From command line, send skewed traffic to endpoint to trigger monitoring alerts (*check all possible args and default values*): 
 
 ```
 python simulated_traffic/main.py --count=10 --multiplier=2 --endpoint_id=807316412694528000
 ```
-4. Once monitoring job runs (per the schedule defined in the monitoring config in (1)), get email alerts and view deviations in Vertex AI Monitoring console:
+#### [4] Once monitoring job runs *(per schedule defined in the monitoring config)*, get email alerts and view deviations in Vertex AI Monitoring console:
 
 **email alerts:**
 
-<img src='imgs/vertex_mm_email_alert.png'>
+<img src='imgs/vertex_mm_email_alert.png' width='500' height='300'>
 
 **console view:**
 
-<img src='imgs/mm_console_view_deviations.png'>
+<div>
+<img src='imgs/mm_console_view_deviations.png' width='500' height='300'/>
+</div>
+    
+#### [5] Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job status will fail:
 
-5. **Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job status will fail:**
+<img src='imgs/successfull_and_failed_jobs_console_view.png' width='500' height='300'>
 
-<img src='imgs/successfull_and_failed_jobs_console_view.png'>
+#### [6] You can easily `pause` a monitoring job when it's not needed
 
-6. You can easily `pause` a monitoring job when it's not needed
+<img src='imgs/run_on_demand_or_pause_scchedule.png' width='500' height='300'>
 
-<img src='imgs/run_on_demand_or_pause_scchedule.png'>
+#### [7] Similarly, you can `resume` the job, or once (enough) skewed prediction requests are sent: run it on-demand:
 
-7. Similarly, you can `resume` the job, or once (enough) skewed prediction requests are sent: run it on-demand:
-
-<img src='imgs/resume_mm_job.png'>
+<img src='imgs/resume_mm_job.png' width='500' height='300'>
 
 *when resuming a Model Monitoring job schedule, you have the option to either (1) resume from this time forward **only** or (2) additionally rerun every inerval skipped while paused:*
 
-<img src='imgs/resume_mm_job_behavior.png'>
+<img src='imgs/resume_mm_job_behavior.png' width='500' height='300'>
 
---
 
 ## pip installs
 
