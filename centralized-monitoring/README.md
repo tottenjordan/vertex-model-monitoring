@@ -46,13 +46,13 @@ python simulated_traffic/main.py --count=10 --multiplier=2 --endpoint_id=8073164
 #### [4] Once monitoring job runs, get email alerts and view deviations in Vertex AI Monitoring console:
 
 <p align="center">
-<img src="imgs/vertex_mm_email_alert.png" width="600"/> <img src="imgs/mm_console_view_deviations.png" width="600"/> 
+<img src='imgs/sxs_email_console_view.png' />
 </p>
 
 #### [5] Note: if during a scheduled monitoring run, the endpoint recieves no prediction requests, the Monitoring job will fail:
 
 <p align="center">
-<img src='imgs/successfull_and_failed_jobs_console_view.png' width='800' height='650' />
+<img src='imgs/successfull_and_failed_jobs_console_view.png' />
 </p>
 
 #### [6] You can easily `pause` a monitoring job when it's not needed, or optionally choose to run a job on-demand
@@ -70,7 +70,7 @@ python simulated_traffic/main.py --count=10 --multiplier=2 --endpoint_id=8073164
 *when resuming a Model Monitoring job schedule, you have the option to either (1) resume from this time forward **only** or (2) additionally rerun every inerval skipped while paused:*
 
 <p align="center">
-<img src='imgs/resume_mm_job_behavior.png' width='800' height='500' />
+<img src='imgs/resume_mm_job_behavior.png' width='800' height='600' />
 </p>
 
 
