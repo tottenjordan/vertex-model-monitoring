@@ -1,7 +1,15 @@
 # Vertex AI Centralized Model Monitoring (private preview)
 
+[Vertex AI Model Monitoring](https://cloud.google.com/vertex-ai/docs/model-monitoring/overview) was made generally available in 2021. Model Monitoring plays an important role in the MLOps lifecycle by continuously validating feature and prediction stability in production.
+
+Based on customer feedback, **Centralized Model Monitoring** is a re-architecture of the model monitoring interface and backend to provide a more flexible, extensible, and consistent monitoring solution for models deployed on any serving infrastructure (even outside of Vertex AI)
 
 <img src="https://services.google.com/fh/files/misc/continous_gif.gif" />
+
+**see User Guides for details:**
+
+* SDK: [Experimental Python SDK User Guide](https://docs.google.com/document/d/1v4WxRXj9EZxqhO6UChWRGBsYLpnCkwwWrM-eb4kaDQ4/edit?resourcekey=0-AH7cd8evs1ghl7L18Eauiw)
+* REST API: [Experimental REST API User Guide](https://docs.google.com/document/d/10CR4040fQfDIt87qZr5t_EXkrFKRm_jc9NCOIy8RLes/edit?resourcekey=0-m9El9DRcDEAlGg3ziPZZtA)
 
 
 ## How to use this repo
@@ -90,18 +98,26 @@ gsutil cp gs://cmm-public-data/sdk/google_cloud_aiplatform-1.36.dev20231025+cent
 pip install --upgrade --force-reinstall google_cloud_aiplatform-1.36.dev20231025+centralized.model.monitoring-py2.py3-none-any.whl --user
 ```
 
-## User Guides
-
-* SDK: [Experimental Python SDK User Guide](https://docs.google.com/document/d/1v4WxRXj9EZxqhO6UChWRGBsYLpnCkwwWrM-eb4kaDQ4/edit?resourcekey=0-AH7cd8evs1ghl7L18Eauiw)
-* REST API: [Experimental REST API User Guide](https://docs.google.com/document/d/10CR4040fQfDIt87qZr5t_EXkrFKRm_jc9NCOIy8RLes/edit?resourcekey=0-m9El9DRcDEAlGg3ziPZZtA)
-
 ## To send skewed traffic to endpoint
 
 > *Note: check args and default values:*
 
 ```
-python simulated_traffic/main.py --count=3
+python simulated_traffic/main.py \ 
+    --endpoint_id=807316412694528000 \
+    --count=10 \
+    --max_rows=4000 \
+    --multiplier=2 \
+    --sleep_time=2 \
 ```
+
+**The above config will:**
+
+* send simulated traffic to endpoint `807316412694528000`
+* complete `count=10` iterations of the skewed prediction request for-loop
+* in each iteration, `max_rows=4000` examples will be sampled from training data, and prepared for skewed prediction requests
+* In the first for-loop iteration, numerical feature values will be multiplied by `--multiplier=2`; in each subsequent iteration the multiplier will increase by `1`
+* between for-loop iterations, the script will sleep for 2 seconds (`--sleep_time=2`)
 
 ### Importing
 
